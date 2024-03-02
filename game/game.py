@@ -5,15 +5,20 @@ class Game:
     end = False
     def newGame():
         board = Board()
-        board.showBoard()
         
         while Game.end == False:
+
                 board.showBoard()
-                if Game.round % 2 == 1:
-                    print("Tour du joueur X")
+                print("Tour {}".format(Game.round))
+                print("Tour du joueur X" if Game.round % 2 == 1 else "Tour du joueur O")
+                play = int(input("Dans quelle case voulez-vous jouer?\n")) - 1
+                if board.getValue(play) != 0 :
+                    play = int(input("Cette case est déjà pleine, choisissez une autre: \n")) - 1
                 else:
-                     print("Tour du joueur O")
-                Game.round+=1
-                if Game.round == 10:
-                    Game.end = True
-        
+                    board.setValue(play, 1 if Game.round % 2 == 1 else -1)
+                    Game.round+=1
+                    if board.checkIfFull() :
+                        print("Fin de la partie")
+                        board.showBoard()
+                        Game.end = True
+    

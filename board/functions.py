@@ -30,3 +30,11 @@ class Board:
     
     def setValue(self, x, val):
         self.content[x] = val
+        
+    def checkIfFull(self):
+        full = True
+        for i in range(0,9):
+            if self.content[i] == 0:
+                full = False
+                break
+        return full
